@@ -149,4 +149,18 @@ mysql> desc invoice_master;
      
                         CODE:5.4
                         
+                        create table invoice_item(inv_id int,p_id int,quantity int,foreign key(inv_id) references invoice_master(inv_id),foreign key(p_id) references product(p_id));
+Query OK, 0 rows affected (0.81 sec)
+
+mysql> desc invoice_item;
++----------+---------+------+-----+---------+-------+
+| Field    | Type    | Null | Key | Default | Extra |
++----------+---------+------+-----+---------+-------+
+| inv_id   | int(11) | YES  | MUL | NULL    |       |
+| p_id     | int(11) | YES  | MUL | NULL    |       |
+| quantity | int(11) | YES  |     | NULL    |       |
++----------+---------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+                        
 
