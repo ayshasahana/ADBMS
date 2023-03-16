@@ -1,3 +1,10 @@
+
+                                  EXP 1.1: DDL COMMANDS
+                                 **********************
+
+
+
+
 1.1)        DDL COMMANDS
 
   a) DDL COMMANDS-CREATE
@@ -109,7 +116,7 @@ mysql> desc customer;
 | id      | int(11)     | NO   | PRI | NULL    |       |
 | address | varchar(30) | YES  |     | NULL    |       |
 | city    | varchar(40) | YES  |     | NULL    |       |
-| ph_no   | varchar(10) | YES  |     | NULL    |       |
+| ph_no   | varchar(10) | YES  |    2. Change the data type of the column ‘DOB’  in year the table EMPLOYEE       | NULL    |       |
 +---------+-------------+------+-----+---------+-------+
 4 rows in set (0.00 sec)
 
@@ -151,7 +158,7 @@ mysql> desc invoice_master;
                         
                         create table invoice_item(inv_id int,p_id int,quantity int,foreign key(inv_id) references invoice_master(inv_id),foreign key(p_id) references product(p_id));
 Query OK, 0 rows affected (0.81 sec)
-
+  2. Change the data type of the column ‘DOB’  in year the table EMPLOYEE    
 mysql> desc invoice_item;
 +----------+---------+------+-----+---------+-------+
 | Field    | Type    | Null | Key | Default | Extra |
@@ -161,6 +168,157 @@ mysql> desc invoice_item;
 | quantity | int(11) | YES  |     | NULL    |       |
 +----------+---------+------+-----+---------+-------+
 3 rows in set (0.01 sec)
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------
+                                DDL COMMANDS ALTER & DROP
+                                *************************
+
+b) DDL COMMANDS- ALTER & DROP
+     
+     1. Add a column ‘SSN’ at the first position in the table EMPLOYEE?
+     
+     
+     
+     CODE:
+     
+     mysql> alter table EMPLOYEE add SSN int first;
+Query OK, 0 rows affected (0.60 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEE;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | int(11)     | YES  |     | NULL    |       |
+| EMP_ID   | int(11)     | YES  |     | NULL    |       |
+| NAME     | varchar(50) | YES  |     | NULL    |       |
+| CITY     | varchar(50) | YES  |     | NULL    |       |
+| DOB      | date        | YES  |     | NULL    |       |
+| ADHAR_NO | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+   
+
+
+
+
+  2. Change the data type of the column ‘DOB’  in year the table EMPLOYEE    
+  
+  CODE:
+   ALTER TABLE EMPLOYEE MODIFY DOB YEAR;
+Query OK, 0 rows affected (0.97 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEE;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | int(11)     | YES  |     | NULL    |       |
+| EMP_ID   | int(11)     | YES  |     | NULL    |       |
+| NAME     | varchar(50) | YES  |     | NULL    |       |
+| CITY     | varchar(50) | YES  |     | NULL    |       |
+| DOB      | year(4)     | YES  |     | NULL    |       |
+| ADHAR_NO | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+
+   3. Delete the column ‘emp_id’ the table EMPLOYEE. 
+   
+   CODE:
+   
+   
+mysql> ALTER TABLE EMPLOYEE DROP COLUMN  EMP_ID;
+Query OK, 0 rows affected (0.64 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEE;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | int(11)     | YES  |     | NULL    |       |
+| NAME     | varchar(50) | YES  |     | NULL    |       |
+| CITY     | varchar(50) | YES  |     | NULL    |       |
+| DOB      | year(4)     | YES  |     | NULL    |       |
+| ADHAR_NO | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+4. Add  the constraint unique for columns ‘SSN, ‘adhar_no’ the table EMPLOYEE
+
+CODE:
+mysql> ALTER TABLE EMPLOYEE ADD CONSTRAINT C1 UNIQUE (SSN), ADD CONSTRAINT C2 UNIQUE (ADHAR_NO);
+Query OK, 0 rows affected (0.88 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEE;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | int(11)     | YES  | UNI | NULL    |       |
+| NAME     | varchar(50) | YES  |     | NULL    |       |
+| CITY     | varchar(50) | YES  |     | NULL    |       |
+| DOB      | year(4)     | YES  |     | NULL    |       |
+| ADHAR_NO | int(11)     | YES  | UNI | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+5. Delete the NULL constraint of ‘age’ in the STUDENT table.
+
+
+CODE:
+mysql> ALTER TABLE STUD MODIFY AGE INT NULL;
+Query OK, 0 rows affected (0.68 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC STUD;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| ROLL_NO | int(11)     | NO   | PRI | NULL    |       |
+| NAME    | varchar(50) | NO   |     | NULL    |       |
+| AGE     | int(11)     | YES  |     | NULL    |       |
+| ADDRESS | varchar(30) | YES  |     | NULL    |       |
+| GENDER  | varchar(20) | YES  |     | M       |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+  6. Change the table name EMPLOYEE as PERSON
+
+CODE:
+mysql> ALTER TABLE EMPLOYEE RENAME TO  PERSON;
+Query OK, 0 rows affected (0.24 sec)
+
+mysql> DESC PERSON;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | int(11)     | YES  | UNI | NULL    |       |
+| NAME     | varchar(50) | YES  |     | NULL    |       |
+| CITY     | varchar(50) | YES  |     | NULL    |       |
+| DOB      | year(4)     | YES  |     | NULL    |       |
+| ADHAR_NO | int(11)     | YES  | UNI | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+  
+  
+  7. Delete the table STUDENT1.
+  
+  CODE:
+  
+  mysql> DROP TABLE DUP_EMP;
+Query OK, 0 rows affected (0.28 sec)
+
+mysql> DESC DUP_EMP;
+ERROR 1146 (42S02): Table 'EXP1.DUP_EMP' doesn't exist
+
+  
+  
 
                         
 
