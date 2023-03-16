@@ -26,5 +26,20 @@ mysql> SELECT * FROM EMPLOYEE;
  2.      Insert values in STUDENT table.
  
  CODE:
+ mysql> INSERT INTO STUD VALUES(1,'AYSHA',22,'ABC HOUSE','F'),(2,'HABEEB',55,'GFD HOUSE','M'),(3,'NIYA',34,'GTR HOUSE','F'),(4,'ABU',44,'SS HOUSE','M');
+Query OK, 4 rows affected (0.06 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM STUD;
++---------+--------+------+-----------+--------+
+| ROLL_NO | NAME   | AGE  | ADDRESS   | GENDER |
++---------+--------+------+-----------+--------+
+|       1 | AYSHA  |   22 | ABC HOUSE | F      |
+|       2 | HABEEB |   55 | GFD HOUSE | M      |
+|       3 | NIYA   |   34 | GTR HOUSE | F      |
+|       4 | ABU    |   44 | SS HOUSE  | M      |
++---------+--------+------+-----------+--------+
+4 rows in set (0.00 sec)
+
  
  
