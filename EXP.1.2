@@ -18,9 +18,22 @@ mysql> SELECT * FROM EMPLOYEE;
 |    2 | RINU  | PALAKKAD   | 2001 |   324355 |
 |    3 | PONNU | CALICUT    | 1997 |   767654 |
 |    4 | LALI  | MALAPPURAM | 1998 |   235498 |
-+------+-------+------------+------+----------+
++------+-------+-mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    366 |     106 | 2223-06-11 |
+|   1454 |     102 | 2223-04-23 |
+|   3435 |     102 | 2223-06-02 |
+|   7876 |     106 | 2223-11-19 |
+|   8787 |     107 | 2223-01-29 |
+|  36676 |     104 | 2223-02-12 |
+|  83444 |     105 | 2223-07-08 |
++--------+---------+------------+
+7 rows in set (0.00 sec)
+-----------+------+----------+
 4 rows in set (0.00 sec)
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
  2.      Insert values in STUDENT table.
@@ -40,12 +53,376 @@ mysql> SELECT * FROM STUD;
 |       4 | ABU    |   44 | SS HOUSE  | M      |
 +---------+--------+------+-----------+--------+
 4 rows in set (0.00 sec)
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------
 
  3.      Insert values in INVOICE database. 
  
  
- CODE:
  
+ 
+ mysql> use invoice;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+
+customer table
+---------------
+mysql> INSERT INTO customer values(102,'vallappil house','kunnamangalam',9876567453,'aysha'),(103,'ababeel house','koduvally',9878432321,'anu'),(104,'aynu house','calicut',9876543212,'reenu'),(107,'heluus house','muriyanal',9889898775,'vasu');
+Query OK, 4 rows affected (0.07 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+
+mysql> select * from customer;
++-----+-----------------+---------------+------------+--------+
+| id  | address         | city          | ph_no      | name   |
++-----+-----------------+---------------+------------+--------+
+| 102 | vallappil house | kunnamangalam | 9876567453 | aysha  |
+| 103 | ababeel house   | koduvally     | 9878432321 | anu    |
+| 104 | aynu house      | calicut       | 9876543212 | reenu  |
+| 105 | challil house   | kochi         | NULL       | nada   |
+| 106 | paloli house    | kochi         | NULL       | aleefa |
+| 107 | heluus house    | muriyanal     | 9889898775 | vasu   |
+| 108 | arakkal house   | kozhikode     | NULL       | aleena |
++-----+-----------------+---------------+------------+--------+
+7 rows in set (0.00 sec)
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+product table
+--------------
+
+mysql> INSERT INTO product  values(1001,'pencil',10),(1002,'pen',15),(1003,'book',55),(1004,'soap',100),(1005,'paste',120),(1006,'shampoo',250),(107,'bag',650);
+Query OK, 4 rows affected (0.07 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+
+
+
+
+mysql> select * from product;
++------+---------+-------+
+| p_id | p_name  | price |
++------+---------+-------+
+| 1001 | pencil  |    10 |
+| 1002 | pen     |    15 |
+| 1003 | book    |    55 |
+| 1004 | soap    |   100 |
+| 1005 | paste   |   120 |
+| 1006 | shampoo |   250 |
+| 1007 | bag     |   650 |
++------+---------+-------+
+7 rows in set (0.00 sec)
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+ invoice_item table
+ ---------------------
+ CODE:
+mysql> insert into invoice_item values(366,1001,10);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into invoice_item values(366,1002,11);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>insert into invoice_item values(7876,1004,15);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into invoice_item values(8787,1006,18);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into invoice_item values(8787,1007,5);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into invoice_item values(8787,1001,35);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into invoice_item values(36676,1007,24);
+Query OK, 1 row affected (0.06 sec)
+
+ 
+ mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|    366 | 1001 |       10 |
+|    366 | 1002 |       11 |
+|   7876 | 1004 |       15 |
+|   8787 | 1006 |       18 |
+|   8787 | 1007 |        5 |
+|   8787 | 1001 |       35 |
+|  36676 | 1007 |       24 |
++--------+------+----------+
+7 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+invoice_master table
+---------------------
+code:
+mysql> insert into invoice_master values(1454,102,'2223-04-23');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into invoice_master values(3435,102,'2223-06-2');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into invoice_master values(36676,104,'2223-02-12');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into invoice_master values(366,106,'2223-06-11');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into invoice_master values(7876,106,'2223-11-19');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into invoice_master values(8787,107,'2223-01-29');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into invoice_master values(83444,105,'2223-07-08');
+Query OK, 1 row affected (0.06 sec)
+
+
+
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    366 |     106 | 2223-06-11 |
+|   1454 |     102 | 2223-04-23 |
+|   3435 |     102 | 2223-06-02 |
+|   7876 |     106 | 2223-11-19 |
+|   8787 |     107 | 2223-01-29 |
+|  36676 |     104 | 2223-02-12 |
+|  83444 |     105 | 2223-07-08 |
++--------+---------+------------+
+7 rows in set (0.00 sec)
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                                                    b)DML COMMANDS- UPDATE
+                                                    ------------------------
+                                                    
+1. Update the price of a particular product. 
+
+mysql> select * from product;
++------+---------+-------+
+| p_id | p_name  | price |
++------+---------+-------+
+| 1001 | pencil  |    10 |
+| 1002 | pen     |    15 |
+| 1003 | book    |    55 |
+| 1004 | soap    |   100 |
+| 1005 | paste   |   120 |
+| 1006 | shampoo |   250 |
+| 1007 | bag     |   650 |
++------+---------+-------+
+7 rows in set (0.01 sec)
+
+
+mysql> update product set price=60 where p_id=1003;
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from product;
++------+---------+-------+
+| p_id | p_name  | price |
++------+---------+-------+
+| 1001 | pencil  |    10 |
+| 1002 | pen     |    15 |
+| 1003 | book    |    60 |
+| 1004 | soap    |   100 |
+| 1005 | paste   |   120 |
+| 1006 | shampoo |   250 |
+| 1007 | bag     |   650 |
++------+---------+-------+
+7 rows in set (0.01 sec)
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+2. Change the name of city ‘south malabar’ to ‘kozhikode’ in the customer table. 
+
+mysql> select * from customer;
++-----+-----------------+---------------+------------+--------+
+| id  | address         | city          | ph_no      | name   |
++-----+-----------------+---------------+------------+--------+
+| 102 | vallappil house | kunnamangalam | 9876567453 | aysha  |
+| 103 | ababeel house   | koduvally     | 9878432321 | anu    |
+| 104 | aynu house      | calicut       | 9876543212 | reenu  |
+| 105 | challil house   | kochi         | NULL       | nada   |
+| 106 | paloli house    | kochi         | NULL       | aleefa |
+| 107 | heluus house    | muriyanal     | 9889898775 | vasu   |
+| 108 | arakkal house   | kozhikode     | NULL       | aleena |
++-----+-----------------+---------------+------------+--------+
+7 rows in set (0.00 sec)
+
+
+ UPDATE customer set city="south malabar" where city= "kozhikode";
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customer;
++-----+-----------------+---------------+------------+--------+
+| id  | address         | city          | ph_no      | name   |
++-----+-----------------+---------------+------------+--------+
+| 102 | vallappil house | kunnamangalam | 9876567453 | aysha  |
+| 103 | ababeel house   | koduvally     | 9878432321 | anu    |
+| 104 | aynu house      | calicut       | 9876543212 | reenu  |
+| 105 | challil house   | kochi         | NULL       | nada   |
+| 106 | paloli house    | kochi         | NULL       | aleefa |
+| 107 | heluus house    | muriyanal     | 9889898775 | vasu   |
+| 108 | arakkal house   | south malabar | NULL       | aleena |
++-----+-----------------+---------------+------------+--------+
+7 rows in set (0.00 sec)
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ 3. Update all prices with 2% of its original price.
+ 
+ mysql> select * from product;
++------+---------+-------+
+| p_id | p_name  | price |
++------+---------+-------+
+| 1001 | pencil  |    10 |
+| 1002 | pen     |    15 |
+| 1003 | book    |    60 |
+| 1004 | soap    |   100 |
+| 1005 | paste   |   120 |
+| 1006 | shampoo |   250 |
+| 1007 | bag     |   650 |
++------+---------+-------+
+7 rows in set (0.00 sec)
+
+
+mysql> update product set price=price+(price*2/100);
+Query OK, 5 rows affected (0.04 sec)
+Rows matched: 7  Changed: 5  Warnings: 0
+
+mysql> select * from product;
++------+---------+-------+
+| p_id | p_name  | price |
++------+---------+-------+
+| 1001 | pencil  |    10 |
+| 1002 | pen     |    15 |
+| 1003 | book    |    61 |
+| 1004 | soap    |   102 |
+| 1005 | paste   |   122 |
+| 1006 | shampoo |   255 |
+| 1007 | bag     |   663 |
++------+---------+-------+
+7 rows in set (0.00 sec)
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  4. Change the address, city, phone number of a particular customer. 
+  
+  
+  mysql> select * from customer;
++-----+-----------------+---------------+------------+--------+
+| id  | address         | city          | ph_no      | name   |
++-----+-----------------+---------------+------------+--------+
+| 102 | vallappil house | kunnamangalam | 9876567453 | aysha  |
+| 103 | ababeel house   | koduvally     | 9878432321 | anu    |
+| 104 | aynu house      | calicut       | 9876543212 | reenu  |
+| 105 | challil house   | kochi         | NULL       | nada   |
+| 106 | paloli house    | kochi         | NULL       | aleefa |
+| 107 | heluus house    | muriyanal     | 9889898775 | vasu   |
+| 108 | arakkal house   | south malabar | NULL       | aleena |
++-----+-----------------+---------------+------------+--------+
+7 rows in set (0.00 sec)
+
+
+
+
+mysql> update customer set address="vasu's house",ph_no=8787654345,city="wayanad" where id=107;
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customer;
++-----+-----------------+---------------+------------+--------+
+| id  | address         | city          | ph_no      | name   |
++-----+-----------------+---------------+------------+--------+
+| 102 | vallappil house | kunnamangalam | 9876567453 | aysha  |
+| 103 | ababeel house   | koduvally     | 9878432321 | anu    |
+| 104 | aynu house      | calicut       | 9876543212 | reenu  |
+| 105 | challil house   | kochi         | NULL       | nada   |
+| 106 | paloli house    | kochi         | NULL       | aleefa |
+| 107 | vasu's house    | wayanad       | 8787654345 | vasu   |
+| 108 | arakkal house   | south malabar | NULL       | aleena |
++-----+-----------------+---------------+------------+--------+
+7 rows in set (0.00 sec)
+------------------------------------------------------------------------------------------------------------------------------------------------------
+  
+ 5. Change the quantity of a purchased product of inv_id ‘7876’
+ 
+ mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|    366 | 1001 |       10 |
+|    366 | 1002 |       11 |
+|   7876 | 1004 |       15 |
+|   8787 | 1006 |       18 |
+|   8787 | 1007 |        5 |
+|   8787 | 1001 |       35 |
+|  36676 | 1007 |       24 |
+|    366 | 1001 |       10 |
++--------+------+----------+
+8 rows in set (0.00 sec)
+mysql> update invoice_item set quantity=8 where inv_id=7876;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|    366 | 1001 |       10 |
+|    366 | 1002 |       11 |
+|   7876 | 1004 |        8 |
+|   8787 | 1006 |       18 |
+|   8787 | 1007 |        5 |
+|   8787 | 1001 |       35 |
+|  36676 | 1007 |       24 |
+|    366 | 1001 |       10 |
++--------+------+----------+
+8 rows in set (0.00 sec)
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+                                                       c) DML COMMAND- DELETE
+                                                       -----------------------
+1. Delete the record of customer id ‘106’. 
+
+
+mysql> select * from customer;
++-----+-----------------+---------------+------------+--------+
+| id  | address         | city          | ph_no      | name   |
++-----+-----------------+---------------+------------+--------+
+| 102 | vallappil house | kunnamangalam | 9876567453 | aysha  |
+| 103 | ababeel house   | koduvally     | 9878432321 | anu    |
+| 104 | aynu house      | calicut       | 9876543212 | reenu  |
+| 105 | challil house   | kochi         | NULL       | nada   |
+| 106 | paloli house    | kochi         | NULL       | aleefa |
+| 107 | vasu's house    | wayanad       | 8787654345 | vasu   |
+| 108 | arakkal house   | south malabar | NULL       | aleena |
++-----+-----------------+---------------+------------+--------+
+7 rows in set (0.00 sec)
+
+
+
+
+
+mysql> delete from customer where id=106;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from customer;
++-----+-----------------+---------------+------------+--------+
+| id  | address         | city          | ph_no      | name   |
++-----+-----------------+---------------+------------+--------+
+| 102 | vallappil house | kunnamangalam | 9876567453 | aysha  |
+| 103 | ababeel house   | koduvally     | 9878432321 | anu    |
+| 104 | aynu house      | calicut       | 9876543212 | reenu  |
+| 105 | challil house   | kochi         | NULL       | nada   |
+| 107 | vasu's house    | wayanad       | 8787654345 | vasu   |
+| 108 | arakkal house   | south malabar | NULL       | aleena |
++-----+-----------------+---------------+------------+--------+
+6 rows in set (0.00 sec)
+
+
+
+
+
  
  
