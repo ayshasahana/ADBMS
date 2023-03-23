@@ -1,0 +1,76 @@
+                                                       a) TCL COMMANDS 
+                                                       ****************
+1.Commit
+---------
+mysql> set autocommit=off;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from EMPLOYEE;
++------+-------+------------+------+----------+
+| SSN  | NAME  | CITY       | DOB  | ADHAR_NO |
++------+-------+------------+------+----------+
+|    1 | ANU   | KOCHI      | 2000 |   454647 |
+|    2 | RINU  | PALAKKAD   | 2001 |   324355 |
+|    3 | PONNU | CALICUT    | 1997 |   767654 |
+|    4 | LALI  | MALAPPURAM | 1998 |   235498 |
++------+-------+------------+------+----------+
+4 rows in set (0.00 sec)
+
+mysql> insert into EMPLOYEE values(5,"chinju","thrissur",2001,564345);
+Query OK, 1 row affected (0.02 sec)
+
+ysql> commit;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select * from EMPLOYEE;
++------+--------+------------+------+----------+
+| SSN  | NAME   | CITY       | DOB  | ADHAR_NO |
++------+--------+------------+------+----------+
+|    1 | ANU    | KOCHI      | 2000 |   454647 |
+|    2 | RINU   | PALAKKAD   | 2001 |   324355 |
+|    3 | PONNU  | CALICUT    | 1997 |   767654 |
+|    4 | LALI   | MALAPPURAM | 1998 |   235498 |
+|    5 | chinju | thrissur   | 2001 |   564345 |
++------+--------+------------+------+----------+
+5 rows in set (0.00 sec)
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2.roll back
+-------------
+mysql> insert into EMPLOYEE values(6,"ramu","kollam",2000,569845);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from EMPLOYEE;
++------+--------+------------+------+----------+
+| SSN  | NAME   | CITY       | DOB  | ADHAR_NO |
++------+--------+------------+------+----------+
+|    1 | ANU    | KOCHI      | 2000 |   454647 |
+|    2 | RINU   | PALAKKAD   | 2001 |   324355 |
+|    3 | PONNU  | CALICUT    | 1997 |   767654 |
+|    4 | LALI   | MALAPPURAM | 1998 |   235498 |
+|    5 | chinju | thrissur   | 2001 |   564345 |
+|    6 | ramu   | kollam     | 2000 |   569845 |
++------+--------+------------+------+----------+
+6 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select * from EMPLOYEE;
++------+--------+------------+------+----------+
+| SSN  | NAME   | CITY       | DOB  | ADHAR_NO |
++------+--------+------------+------+----------+
+|    1 | ANU    | KOCHI      | 2000 |   454647 |
+|    2 | RINU   | PALAKKAD   | 2001 |   324355 |
+|    3 | PONNU  | CALICUT    | 1997 |   767654 |
+|    4 | LALI   | MALAPPURAM | 1998 |   235498 |
+|    5 | chinju | thrissur   | 2001 |   564345 |
++------+--------+------------+------+----------+
+5 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+ 3.  Savepoint
+ --------------
+ 
+ 
+
