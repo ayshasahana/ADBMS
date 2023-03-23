@@ -419,10 +419,136 @@ mysql> select * from customer;
 | 108 | arakkal house   | south malabar | NULL       | aleena |
 +-----+-----------------+---------------+------------+--------+
 6 rows in set (0.00 sec)
+-----------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-
-
-
+ 2. Delete all purchase details of items its quantity less than 18. 
  
+ 
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   8787 | 1006 |       18 |
+|   8787 | 1007 |        5 |
+|   8787 | 1001 |       35 |
+|  36676 | 1007 |       24 |
++--------+------+----------+
+4 rows in set (0.01 sec)
+ 
+
+mysql> delete from invoice_item where quantity<18;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   8787 | 1006 |       18 |
+|   8787 | 1001 |       35 |
+|  36676 | 1007 |       24 |
++--------+------+----------+
+3 rows in set (0.00 sec)
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+ 3. Delete the purchase details of product ‘bag’ in the in_id ‘1007’. 
+ 
+ mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   8787 | 1006 |       18 |
+|   8787 | 1001 |       35 |
+|  36676 | 1007 |       24 |
++--------+------+----------+
+3 rows in set (0.00 sec)
+
+mysql> delete from invoice_item where inv_id=36676 and p_id=1007;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   8787 | 1006 |       18 |
+|   8787 | 1001 |       35 |
++--------+------+----------+
+2 rows in set (0.00 sec)
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+4. Delete details of employees who does not have phone number. 
+mysql> select * from customer;
++-----+-----------------+---------------+------------+--------+
+| id  | address         | city          | ph_no      | name   |
++-----+-----------------+---------------+------------+--------+
+| 102 | vallappil house | kunnamangalam | 9876567453 | aysha  |
+| 103 | ababeel house   | koduvally     | 9878432321 | anu    |
+| 104 | aynu house      | calicut       | 9876543212 | reenu  |
+| 105 | challil house   | kochi         | NULL       | nada   |
+| 107 | vasu's house    | wayanad       | 8787654345 | vasu   |
+| 108 | arakkal house   | south malabar | NULL       | aleena |
++-----+-----------------+---------------+------------+--------+
+6 rows in set (0.00 sec)
+
+
+mysql> delete from customer where ph_no is NULL;
+Query OK, 2 rows affected (0.07 sec)
+
+mysql> select * from customer;
++-----+-----------------+---------------+------------+-------+
+| id  | address         | city          | ph_no      | name  |
++-----+-----------------+---------------+------------+-------+
+| 102 | vallappil house | kunnamangalam | 9876567453 | aysha |
+| 103 | ababeel house   | koduvally     | 9878432321 | anu   |
+| 104 | aynu house      | calicut       | 9876543212 | reenu |
+| 107 | vasu's house    | wayanad       | 8787654345 | vasu  |
++-----+-----------------+---------------+------------+-------+
+4 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+5. Delete all records from STUDENT table. 
+mysql> select * from STUD;
++---------+--------+------+-----------+--------+
+| ROLL_NO | NAME   | AGE  | ADDRESS   | GENDER |
++---------+--------+------+-----------+--------+
+|       1 | AYSHA  |   22 | ABC HOUSE | F      |
+|       2 | HABEEB |   55 | GFD HOUSE | M      |
+|       3 | NIYA   |   34 | GTR HOUSE | F      |
+|       4 | ABU    |   44 | SS HOUSE  | M      |
++---------+--------+------+-----------+--------+
+4 rows in set (0.00 sec)
+
+mysql> DELETE FROM STUD;
+Query OK, 4 rows affected (0.04 sec)
+
+mysql> select * from STUD;
+Empty set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+6. Delete Invoice details of a particular customer. 
+
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1454 |     102 | 2223-04-23 |
+|   3435 |     102 | 2223-06-02 |
+|   8787 |     107 | 2223-01-29 |
+|  36676 |     104 | 2223-02-12 |
++--------+---------+------------+
+4 rows in set (0.00 sec)
+
+
+mysql> delete from invoice_master where cust_id=104;
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1454 |     102 | 2223-04-23 |
+|   3435 |     102 | 2223-06-02 |
+|   8787 |     107 | 2223-01-29 |
++--------+---------+------------+
+3 rows in set (0.00 sec)
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
  
