@@ -1,0 +1,129 @@
+                                 1.7 OPTIMIZING DATABASE:  (GROUP BY, AGGREGATE FUNCTIONS)
+                                 ---------------------------------------------------------
+CUSTOMER TABLE
+--------------
+
+mysql> select * from customer;
++-----+-----------------+---------------+------------+--------+
+| id  | address         | city          | ph_no      | name   |
++-----+-----------------+---------------+------------+--------+
+| 102 | vallappil house | kunnamangalam | 9876567453 | aysha  |
+| 103 | ababeel house   | koduvally     | 9878432321 | anu    |
+| 104 | aynu house      | calicut       | 9876543212 | reenu  |
+| 107 | vasu's house    | wayanad       | 8787654345 | vasu   |
+| 108 | kizhakoth house | thrissur      | NULL       | yoonus |
+| 109 | parammalhouse   | malappuram    | NULL       | anas   |
++-----+-----------------+---------------+------------+--------+
+6 rows in set (0.00 sec)
+
+PRODUCT TABLE
+-------------
+mysql> select * from product;
++------+---------+-------+
+| p_id | p_name  | price |
++------+---------+-------+
+| 1001 | pencil  |    10 |
+| 1002 | pen     |    15 |
+| 1003 | book    |    61 |
+| 1004 | soap    |   102 |
+| 1005 | paste   |   122 |
+| 1006 | shampoo |   255 |
+| 1007 | bag     |   663 |
++------+---------+-------+
+7 rows in set (0.00 sec)
+
+1) List product name, price except pen on price order.
+
+mysql> SELECT p_name,price FROM product WHERE p_name!='pen' ORDER BY price ASC;+---------+-------+
+| p_name  | price |
++---------+-------+
+| pencil  |    10 |
+| book    |    61 |
+| soap    |   102 |
+| paste   |   122 |
+| shampoo |   255 |
+| bag     |   663 |
++---------+-------+
+6 rows in set (0.00 sec)
+
+------------------------------------------------------------------------------------------------------------------------------------------
+2) Find minimum, maximum and average price of products.
+
+mysql>  SELECT MIN(price),MAX(price),AVG(price) FROM product;
++------------+------------+------------+
+| MIN(price) | MAX(price) | AVG(price) |
++------------+------------+------------+
+|         10 |        663 |   175.4286 |
++------------+------------+------------+
+1 row in set (0.00 sec)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+3) Find number of customers in each city.
+
+mysql> select * from customer;
++-----+-----------------+---------------+------------+---------+
+| id  | address         | city          | ph_no      | name    |
++-----+-----------------+---------------+------------+---------+
+| 102 | vallappil house | kunnamangalam | 9876567453 | aysha   |
+| 103 | ababeel house   | koduvally     | 9878432321 | anu     |
+| 104 | aynu house      | calicut       | 9876543212 | reenu   |
+| 107 | vasu's house    | wayanad       | 8787654345 | vasu    |
+| 108 | kizhakoth house | thrissur      | NULL       | yoonus  |
+| 109 | parammalhouse   | malappuram    | NULL       | anas    |
+| 120 | vpn house       | calicut       | 9876765434 | sajitha |
+| 122 | arakkal house   | calicut       | 9876765999 | koulath |
++-----+-----------------+---------------+------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT count(*),city FROM customer group by city;
++----------+---------------+
+| count(*) | city          |
++----------+---------------+
+|        3 | calicut       |
+|        1 | koduvally     |
+|        1 | kunnamangalam |
+|        1 | malappuram    |
+|        1 | thrissur      |
+|        1 | wayanad       |
++----------+---------------+
+6 rows in set (0.00 sec)
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4) Find number of customers in each city, only include city with more than 3 customers.
+
+
+mysql>  SELECT count(*),city FROM customer group by city HAVING count(*)>2;
++----------+---------+
+| count(*) | city    |
++----------+---------+
+|        3 | calicut |
++----------+---------+
+1 row in set (0.00 sec)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5) Show data as displayed ‘who, where’ Eg: ‘customer1 lives in ekm’.
+
+mysql> SELECT concat(name, " lives in ", city) AS cust_info FROM customer;
++------------------------------+
+| cust_info                    |
++------------------------------+
+| aysha lives in kunnamangalam |
+| anu lives in koduvally       |
+| reenu lives in calicut       |
+| vasu lives in wayanad        |
+| yoonus lives in thrissur     |
+| anas lives in malappuram     |
+| sajitha lives in calicut     |
+| koulath lives in calicut     |
++------------------------------+
+8 rows in set (0.00 sec)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
