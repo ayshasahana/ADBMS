@@ -1,0 +1,40 @@
+1) 1. Create a view for customers who have purchased products.
+
+
+mysql>  CREATE VIEW CUST_VIEW AS SELECT name from customer WHERE id IN(SELECT cust_id FROM invoice_master);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from CUST_VIEW;
++--------+
+| name   |
++--------+
+| aysha  |
+| reenu  |
+| vasu   |
+| yoonus |
+| anas   |
++--------+
+5 rows in set (0.02 sec)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+2) Create a view for invoice products[cust_name,  inv_id, product_id, quantity]
+
+mysql> CREATE VIEW VIEW_INVPRODUCT AS SELECT customer.name,invoice_master.inv_id,product.p_id,invoice_item.quantity FROM customer INNER JOIN invoice_master ON customer.id=invoice_master.cust_id INNER JOIN invoice_item ON invoice_master.inv_id=invoice_item.inv_id INNER JOIN product ON product.p_id=invoice_item.p_id;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from VIEW_INVPRODUCT;
++--------+--------+------+----------+
+| name   | inv_id | p_id | quantity |
++--------+--------+------+----------+
+| vasu   |   8787 | 1006 |       18 |
+| vasu   |   8787 | 1001 |       35 |
+| yoonus |   2345 | 1002 |        1 |
+| anas   |   7667 | 1004 |        2 |
+| reenu  |   8767 | 1004 |       12 |
+| anas   |   8763 | 1005 |       11 |
+| aysha  |   9286 | 1002 |       11 |
+| vasu   |   8787 | 1004 |        4 |
++--------+--------+------+----------+
+8 rows in set (0.03 sec)
+
+--------------------------------------------------------------------------------------------------------------------------------
