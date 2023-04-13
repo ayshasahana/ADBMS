@@ -1,0 +1,126 @@
+                                  OPTIMIZING DATABASE: (Using Set, arithmetic, logical and special operators)
+                                 ***************************************************************************
+mysql> select * from customer;
++-----+-----------------+---------------+------------+---------+
+| id  | address         | city          | ph_no      | name    |
++-----+-----------------+---------------+------------+---------+
+| 102 | vallappil house | kunnamangalam | 9876567453 | aysha   |
+| 103 | ababeel house   | koduvally     | 9878432321 | anu     |
+| 104 | aynu house      | calicut       | 9876543212 | reenu   |
+| 107 | vasu's house    | wayanad       | 8787654345 | vasu    |
+| 108 | kizhakoth house | thrissur      | NULL       | yoonus  |
+| 109 | parammalhouse   | malappuram    | NULL       | anas    |
+| 120 | vpn house       | calicut       | 9876765434 | sajitha |
+| 122 | arakkal house   | calicut       | 9876765999 | koulath |
++-----+-----------------+---------------+------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT * FROM product;
++------+---------+-------+
+| p_id | p_name  | price |
++------+---------+-------+
+| 1001 | pencil  |    10 |
+| 1002 | pen     |    15 |
+| 1003 | book    |    61 |
+| 1004 | soap    |   102 |
+| 1005 | paste   |   122 |
+| 1006 | shampoo |   255 |
+| 1007 | bag     |   663 |
++------+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1454 |     102 | 2223-04-23 |
+|   2345 |     108 | 2223-05-24 |
+|   3435 |     102 | 2223-06-02 |
+|   7667 |     109 | 2223-03-21 |
+|   8763 |     109 | 2223-01-13 |
+|   8767 |     104 | 2223-05-11 |
+|   8787 |     107 | 2223-01-29 |
+|   9286 |     102 | 2223-08-16 |
++--------+---------+------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT * FROM invoice_item;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   8787 | 1006 |       18 |
+|   8787 | 1001 |       35 |
+|   2345 | 1002 |        1 |
+|   7667 | 1004 |        2 |
+|   8767 | 1004 |       12 |
+|   8763 | 1005 |       11 |
+|   9286 | 1002 |       11 |
+|   8787 | 1004 |        4 |
++--------+------+----------+
+8 rows in set (0.00 sec)
+
+1.Display customer_id, city  who lives either in ‘calicut’ or in ‘koduvally’
+
+
+
+mysql> select id,city from customer where city="calicut" or city="koduvally";
++-----+-----------+
+| id  | city      |
++-----+-----------+
+| 103 | koduvally |
+| 104 | calicut   |
+| 120 | calicut   |
+| 122 | calicut   |
++-----+-----------+
+4 rows in set (0.00 sec)
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+2. Display product details with an updated price amount(new price= old price+5rs)
+
+
+mysql>  update product set price=price+5;
+Query OK, 7 rows affected (0.09 sec)
+Rows matched: 7  Changed: 7  Warnings: 0
+
+mysql> SELECT * FROM product;
++------+---------+-------+
+| p_id | p_name  | price |
++------+---------+-------+
+| 1001 | pencil  |    15 |
+| 1002 | pen     |    20 |
+| 1003 | book    |    66 |
+| 1004 | soap    |   107 |
+| 1005 | paste   |   127 |
+| 1006 | shampoo |   260 |
+| 1007 | bag     |   668 |
++------+---------+-------+
+7 rows in set (0.00 sec)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+3.Display customer details who doesn’t have phone number and lives in ‘thrissur’ city (use logical operators)
+
+mysql>  select * from customer where ph_no is NULL and city="thrissur";
++-----+-----------------+----------+-------+--------+
+| id  | address         | city     | ph_no | name   |
++-----+-----------------+----------+-------+--------+
+| 108 | kizhakoth house | thrissur | NULL  | yoonus |
++-----+-----------------+----------+-------+--------+
+1 row in set (0.00 sec)
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4.List the product names if it finds any records in the invoice items table has quantity =4 (use special operators)
+
+
+mysql> select p_name from product where p_id in(select p_id from invoice_item where quantity=4);
++--------+
+| p_name |
++--------+
+| soap   |
++--------+
+1 row in set (0.01 sec)
+
+
+
