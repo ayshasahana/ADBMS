@@ -1,0 +1,123 @@
+                                             EXPERIMENT NO: 1.8 OPTIMIZING DATABASE:(JOINS)
+                                             **********************************************
+ mysql> select * from customer;
++-----+-----------------+---------------+------------+---------+
+| id  | address         | city          | ph_no      | name    |
++-----+-----------------+---------------+------------+---------+
+| 102 | vallappil house | kunnamangalam | 9876567453 | aysha   |
+| 103 | ababeel house   | koduvally     | 9878432321 | anu     |
+| 104 | aynu house      | calicut       | 9876543212 | reenu   |
+| 107 | vasu's house    | wayanad       | 8787654345 | vasu    |
+| 108 | kizhakoth house | thrissur      | NULL       | yoonus  |
+| 109 | parammalhouse   | malappuram    | NULL       | anas    |
+| 120 | vpn house       | calicut       | 9876765434 | sajitha |
+| 122 | arakkal house   | calicut       | 9876765999 | koulath |
++-----+-----------------+---------------+------------+---------+
+8 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM product;
++------+---------+-------+
+| p_id | p_name  | price |
++------+---------+-------+
+| 1001 | pencil  |    10 |
+| 1002 | pen     |    15 |
+| 1003 | book    |    61 |
+| 1004 | soap    |   102 |
+| 1005 | paste   |   122 |
+| 1006 | shampoo |   255 |
+| 1007 | bag     |   663 |
++------+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1454 |     102 | 2223-04-23 |
+|   2345 |     108 | 2223-05-24 |
+|   3435 |     102 | 2223-06-02 |
+|   7667 |     109 | 2223-03-21 |
+|   8763 |     109 | 2223-01-13 |
+|   8767 |     104 | 2223-05-11 |
+|   8787 |     107 | 2223-01-29 |
+|   9286 |     102 | 2223-08-16 |
++--------+---------+------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT * FROM invoice_item;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|   8787 | 1006 |       18 |
+|   8787 | 1001 |       35 |
+|   2345 | 1002 |        1 |
+|   7667 | 1004 |        2 |
+|   8767 | 1004 |       12 |
+|   8763 | 1005 |       11 |
+|   9286 | 1002 |       11 |
+|   8787 | 1004 |        4 |
++--------+------+----------+
+8 rows in set (0.00 sec)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.List the product name and quantity of invoice items.
+
+mysql>  SELECT product.p_name,invoice_item.quantity FROM product INNER JOIN invoice_item ON product.P_id=invoice_item.p_id;
++---------+----------+
+| p_name  | quantity |
++---------+----------+
+| shampoo |       18 |
+| pencil  |       35 |
+| pen     |        1 |
+| soap    |        2 |
+| soap    |       12 |
+| paste   |       11 |
+| pen     |       11 |
+| soap    |        4 |
++---------+----------+
+8 rows in set (0.02 sec)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+ 2.Display invoice details of the transaction dated ’2223-08-16’.
+ 
+ mysql> select invoice_master.inv_date,invoice_master.cust_id,customer.name,invoice_item.p_id,product.p_name,invoice_item.quantity from invoice_master inner join
+ invoice_item on invoice_master.inv_id=invoice_item.inv_id inner join product on
+ product.p_id=invoice_item.p_id inner join customer on customer.id=invoice_master.cust_id where inv_date="2223-08-16";
++------------+---------+-------+------+--------+----------+
+| inv_date   | cust_id | name  | p_id | p_name | quantity |
++------------+---------+-------+------+--------+----------+
+| 2223-08-16 |     102 | aysha | 1002 | pen    |       11 |
++------------+---------+-------+------+--------+----------+
+1 row in set (0.00 sec)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+4.Display all customer details and invoice details must include customer has not purchased items.
+
+
+mysql> select name,invoice_master.inv_id,invoice_master.inv_date,product.p_name
+from customer left join invoice_master on customer.id=invoice_master.cust_id left join invoice_item on invoice_master.inv_id=invoice_item.inv_id left join product on product.p_id=invoice_item.p_id;
++---------+--------+------------+---------+
+| name    | inv_id | inv_date   | p_name  |
++---------+--------+------------+---------+
+| aysha   |   1454 | 2223-04-23 | NULL    |
+| yoonus  |   2345 | 2223-05-24 | pen     |
+| aysha   |   3435 | 2223-06-02 | NULL    |
+| anas    |   7667 | 2223-03-21 | soap    |
+| anas    |   8763 | 2223-01-13 | paste   |
+| reenu   |   8767 | 2223-05-11 | soap    |
+| vasu    |   8787 | 2223-01-29 | shampoo |
+| vasu    |   8787 | 2223-01-29 | pencil  |
+| vasu    |   8787 | 2223-01-29 | soap    |
+| aysha   |   9286 | 2223-08-16 | pen     |
+| anu     |   NULL | NULL       | NULL    |
+| sajitha |   NULL | NULL       | NULL    |
+| koulath |   NULL | NULL       | NULL    |
++---------+--------+------------+---------+
+13 rows in set (0.07 sec)
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
