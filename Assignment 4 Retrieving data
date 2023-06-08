@@ -1,0 +1,45 @@
+NoSQL – RETRIEVING DATA
+========================================
+
+
+
+1.Write a MongoDB query to display the customer documents having city ‘eranakulam’,’trivandrum’.
+=================================================================================
+db.customer.find({$or:[{"city":"eranakulam"},{"city":"trivandrum"}]}).pretty();
+
+
+{
+	"_id" : ObjectId("648170953f23e195741da31f"),
+	"Name" : "veena",
+	"city" : "eranakulam",
+	"phno" : "8076744512",
+	"age" : 60
+}
+{
+	"_id" : ObjectId("648170dd3f23e195741da320"),
+	"Name" : "Ammu",
+	"city" : "trivandrum",
+	"phno" : "8000744512",
+	"age" : 18
+}
+
+2) Write a MongoDB query to display all customer documents who have age >50.
+============================================================================
+ db.customer.find({"age":{$gt:50}})
+{ "_id" : ObjectId("6481705e3f23e195741da31e"), "Name" : "Athul", "city" : "wayanad", "phno" : "9076744512", "age" : 254 }
+{ "_id" : ObjectId("648170953f23e195741da31f"), "Name" : "veena", "city" : "eranakulam", "phno" : "8076744512", "age" : 60 }
+
+
+3) Write a MongoDB query to find customer documents who not live in ‘trivandrum’.
+===========================================================================
+ db.customer.find({"city":{$ne:"trivandrum"}})
+
+{ "_id" : ObjectId("6481700a3f23e195741da31c"), "Name" : "Ameena", "city" : "thrissur", "phno" : "9074567512", "age" : 20 }
+{ "_id" : ObjectId("6481705e3f23e195741da31e"), "Name" : "Athul", "city" : "wayanad", "phno" : "9076744512", "age" : 254 }
+{ "_id" : ObjectId("648170953f23e195741da31f"), "Name" : "veena", "city" : "eranakulam", "phno" : "8076744512", "age" : 60 }
+
+----------------------------------------------------------------------------------------------------------------------------------
+ 
+ 
+
+
