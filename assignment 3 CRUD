@@ -1,7 +1,7 @@
 1.Write a MongoDB query to create an INVOICE database and collections (CUSTOMER,
 
 PRODUCT) and its corresponding documents.
-=============================================================================================================
+============================================================================================================
 > use invoice
 switched to db invoice
 
