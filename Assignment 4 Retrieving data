@@ -4,7 +4,7 @@ NoSQL – RETRIEVING DATA
 
 
 1.Write a MongoDB query to display the customer documents having city ‘eranakulam’,’trivandrum’.
-=================================================================================
+========================================================================================
 db.customer.find({$or:[{"city":"eranakulam"},{"city":"trivandrum"}]}).pretty();
 
 
