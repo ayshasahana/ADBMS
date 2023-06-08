@@ -42,4 +42,4 @@ db.customer.find({$or:[{"city":"eranakulam"},{"city":"trivandrum"}]}).pretty();
  
  
 
-
+//VERIFIED
