@@ -18,10 +18,11 @@ AGGREGATE FUNCTIONS AND REGULAR EXPRESSIONS
 ==================================================================================
 
 >  db.customer.aggregate([{$group:{_id:"$city",total:{$sum:1}}}])
+
 { "_id" : "thrissur", "total" : 1 }
 { "_id" : "eranakulam", "total" : 1 }
 { "_id" : "wayanad", "total" : 1 }
-{ "_id" : "trivandrum", "total" : 1 }
+{ "_id" : "trivandrum", "total" : 2 }
 
 
 3.Write a MongoDB query to find minimum and maximum age in each city.
@@ -30,9 +31,10 @@ AGGREGATE FUNCTIONS AND REGULAR EXPRESSIONS
 > db.customer.aggregate([{$group:{_id:"$city",max_age:{$max:"$age"},min_age:{$min:"$age"}}}])
 
 { "_id" : "thrissur", "max_age" : 20, "min_age" : 20 }
-{ "_id" : "eranakulam", "max_age" : 60, "min_age" : 60 }
+{ "_id" : "trivandrum", "max_age" : 28, "min_age" : 18 }
 { "_id" : "wayanad", "max_age" : 254, "min_age" : 254 }
-{ "_id" : "trivandrum", "max_age" : 18, "min_age" : 18 }
+{ "_id" : "eranakulam", "max_age" : 60, "min_age" : 60 }
+
 
 
 
